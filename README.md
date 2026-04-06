@@ -1,3 +1,137 @@
+# ⚠️ NOTAS INTERNAS (Fabiano) – COMO USAR ESTE REPOSITÓRIO 
+(o texto do README.txt original do opendnp3 está no final da parte em português, depois dessa nota)
+
+Este repositório é um fork funcional do openDNP3 (versão antiga compatível).
+Foi congelado para evitar problemas com mudanças de API.
+
+## 🎯 Objetivo
+
+Usar como base para desenvolvimento de outstation DNP3 (ex: concentrador ABNT → DNP3).
+
+---
+
+## 🛠️ 1. Build da biblioteca principal (OBRIGATÓRIO)
+
+cd ~/projects/opendnp3
+mkdir build
+cd build
+cmake ..
+make -j4
+
+Verificar se a lib foi gerada:
+
+ls cpp/lib
+
+Deve existir:
+
+libopendnp3.so
+
+---
+
+## 🧪 2. Build dos exemplos (master / outstation)
+
+⚠️ IMPORTANTE: os exemplos NÃO compilam automaticamente.
+
+### Exemplo: master
+
+Editar o arquivo:
+
+cpp/examples/master/CMakeLists.txt
+
+Conteúdo:
+
+include_directories(/home/fabiano/projects/opendnp3/cpp/lib/include)
+link_directories(/home/fabiano/projects/opendnp3/build/cpp/lib)
+
+add_executable(master-demo ./main.cpp)
+target_link_libraries(master-demo opendnp3)
+
+Compilar:
+
+cd cpp/examples/master
+rm -rf build
+mkdir build
+cd build
+cmake ..
+make
+
+---
+
+### Exemplo: outstation
+
+Mesmo procedimento:
+
+include_directories(/home/fabiano/projects/opendnp3/cpp/lib/include)
+link_directories(/home/fabiano/projects/opendnp3/build/cpp/lib)
+
+add_executable(outstation-demo ./main.cpp)
+target_link_libraries(outstation-demo opendnp3)
+
+---
+
+## ⚠️ 3. Variável obrigatória para execução
+
+Antes de rodar:
+
+export LD_LIBRARY_PATH=~/projects/opendnp3/build/cpp/lib:$LD_LIBRARY_PATH
+
+---
+
+## 🚀 4. Executar
+
+Terminal 1:
+
+./outstation-demo
+
+Terminal 2:
+
+./master-demo
+
+---
+
+## 🧠 Observações importantes
+
+* Esta versão possui ConsoleLogger.h → compatível com exemplos antigos
+* Versões mais novas do openDNP3 quebram esses exemplos
+* NÃO atualizar sem necessidade
+
+---
+
+## 🔥 Uso no projeto real
+
+Arquitetura alvo:
+
+ABNT → processamento → pontos DNP3 → SCADA
+
+Mapeamento típico:
+
+* tensão/corrente → Analog Input
+* energia → Counter
+* alarmes → Binary Input
+
+---
+
+## 💡 Dica
+
+Se algo não compilar:
+
+→ provavelmente problema de include ou link path
+→ conferir caminhos absolutos no CMakeLists.txt
+
+---
+
+## 📌 Conclusão
+
+Este fork é estável e funcional.
+Evitar perder tempo tentando usar versões mais novas do openDNP3.
+
+
+
+A partir daqui, tudo o que segue é o README.txt original que foi clonado do opendnp3 original.
+
+
+
+
 End-of-Life
 ========
 
