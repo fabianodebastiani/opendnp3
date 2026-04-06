@@ -6,7 +6,7 @@ Foi congelado para evitar problemas com mudanças de API.
 
 ## 🎯 Objetivo
 
-Usar como base para desenvolvimento de outstation DNP3 (ex: concentrador ABNT → DNP3).
+Usar como base para desenvolvimento de um projeto genérico em DNP3.
 
 ---
 
@@ -94,20 +94,6 @@ Terminal 2:
 * Esta versão possui ConsoleLogger.h → compatível com exemplos antigos
 * Versões mais novas do openDNP3 quebram esses exemplos
 * NÃO atualizar sem necessidade
-
----
-
-## 🔥 Uso no projeto real
-
-Arquitetura alvo:
-
-ABNT → processamento → pontos DNP3 → SCADA
-
-Mapeamento típico:
-
-* tensão/corrente → Analog Input
-* energia → Counter
-* alarmes → Binary Input
 
 ---
 
